@@ -16,6 +16,9 @@ public class camera : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate() {
         if (Player.position.x < MaxPosition.position.x && Player.position.x > MinPosition.position.x) return;
-        transform.position = new Vector3(Player.position.x, transform.position.y, transform.position.z);
+        if (Player.position.x <= MinPosition.position.x)
+            transform.position = Vector3.Lerp(transform.position, Player.position + Offset, Time.deltaTime * 20);
+        else
+            transform.position = new Vector3(Player.position.x, transform.position.y, transform.position.z);
     }
 }
